@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   #Home Page
-  get '/' => 'application#home', as: 'home'
+  get '/' => 'home#index', as: 'home'
 
   #User Routes
   resources :users, :except => :index

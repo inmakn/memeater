@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
+
   has_secure_password
-  validates_presence_of :username, :high_score
-  validates_numericality_of :high_score
+  validates_presence_of :username, :photo_url
   validates_uniqueness_of :username
+
+  has_many :games
 end

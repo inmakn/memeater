@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801153618) do
+ActiveRecord::Schema.define(version: 20140801212735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: true do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.integer  "hp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "environments", force: true do |t|
+    t.string   "name"
+    t.string   "top_layer"
+    t.string   "mid_layer"
+    t.string   "bottom_layer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "gameframes", force: true do |t|
   end
@@ -22,12 +39,34 @@ ActiveRecord::Schema.define(version: 20140801153618) do
   create_table "games", force: true do |t|
     t.integer "score"
     t.integer "user_id"
+    t.integer "character_id"
+    t.integer "environment_id"
+  end
+
+  create_table "games_memes", id: false, force: true do |t|
+    t.integer "meme_id", null: false
+    t.integer "game_id", null: false
+  end
+
+  add_index "games_memes", ["game_id", "meme_id"], name: "index_games_memes_on_game_id_and_meme_id", using: :btree
+  add_index "games_memes", ["meme_id", "game_id"], name: "index_games_memes_on_meme_id_and_game_id", using: :btree
+
+  create_table "memes", force: true do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.string   "link_url"
+    t.integer  "speed"
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string  "username"
     t.string  "password_digest"
     t.integer "high_score"
+    t.integer "num_games_played"
+    t.string  "photo_url"
   end
 
 end

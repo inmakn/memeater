@@ -20,9 +20,14 @@ ActiveRecord::Schema.define(version: 20140801153618) do
   end
 
   create_table "games", force: true do |t|
+    t.integer "score"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|
+    t.string  "username"
+    t.string  "password_digest"
+    t.integer "high_score"
   end
 
 end

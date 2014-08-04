@@ -7,6 +7,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @memes = []
+    
     # if current_user.num_games_played > 7
     #   memes_to_display = Meme.where('level <= ?' 3)
     #   memes_to_display.each do |meme|

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, :except => :index
 
   #Game Routes
-  resources :games, :only => [:new, :create, :edit, :update]
+  resources :games, :only => [:new, :show, :create, :edit, :update]
 
   #GameFrame Routes
   resources :gameframes, :only => :show

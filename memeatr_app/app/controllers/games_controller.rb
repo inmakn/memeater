@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
 
+  before_action :authenticate?, only: [:new, :show, :edit, :update]
+
   def new
     @game = Game.new
   end

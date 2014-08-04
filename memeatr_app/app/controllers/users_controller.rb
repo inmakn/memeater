@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authorize, only: [:show, :edit, :update, :destroy]
+
   def show
     @user = User.find(params[:id])
   end
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:current_user] = @user.id
       redirect_to user_path(@user)
     else
       render :new
@@ -39,7 +42,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_comfirmation)
+    params.require(:user).permit(:username, :photo_url, :password, :password_comfirmation)
   end
 
 end

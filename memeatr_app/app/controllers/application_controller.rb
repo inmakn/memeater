@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
     unless current_user && current_user.id == params[:id].to_i
       redirect_to error_path
     end
-  end  
+  end
 
 end

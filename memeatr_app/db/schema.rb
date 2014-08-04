@@ -33,9 +33,6 @@ ActiveRecord::Schema.define(version: 20140801212735) do
     t.datetime "updated_at"
   end
 
-  create_table "gameframes", force: true do |t|
-  end
-
   create_table "games", force: true do |t|
     t.integer "score"
     t.integer "user_id"

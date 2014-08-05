@@ -35,6 +35,16 @@ gem 'awesome_print'
 gem "paperclip", "~> 4.1"
 gem 'aws-sdk', '~> 1.5.7'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.2'
+end
+
+group :test do
+  gem 'shoulda-matchers', require: false
+end
+
+gem 'capybara'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

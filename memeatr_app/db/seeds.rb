@@ -1,34 +1,55 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
-
-fen = User.create(username: 'fen',
-                  photo_url: 'http://www.mondayeveningconcerts.org/images/bios/ustvolskaya.jpg',
+# Seeding 1 User
+fen = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
+                  username: 'fen',
                   password: 'querty',
-                  password_confirmation: 'querty')
+                  password_confirmation: 'querty',
+                  num_games_played: 0)
 
+# Seeding 3 Characters
 
-finn = Character.create(name: 'Finn The Human',
-                  image_url: 'http://img1.wikia.nocookie.net/__cb20131128031157/adventuretimewithfinnandjake/images/b/b0/Finn_with_five_fingers.png',
-                  hp: 100)
+finn = Character.create!(name: 'Wilhelm',
+                         hp: 15,
+                         spritesheet: File.open("app/assets/images/finn_sprite_sheet.png")
+                         )
 
+# jetpack = Character.create!(name: 'Jetpack Dude',
+#                          hp: 30,
+#                          spritesheet: )
 
-level_one = Environment.create(name: "Level One",
-                  top_layer: "http://www.freestockphotos.biz/pictures/15/15146/Illustration+of+a+stormy+cloud.png",
-                  mid_layer: "http://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Clouds_(transparent).png/800px-Clouds_(transparent).png",
-                  bottom_layer: "http://www.torange.us/photo/20/13/Clear-sky-1363594685_18.jpg")
+knight = Character.create!(name: 'Super Knight',
+                         hp: 50,
+                         spritesheet: File.open("app/assets/images/knight_sprite_sheet.png")
+                         )
 
+# Seeding 3 Memes
 
-doge = Meme.create(image_url: "http://a.deviantart.net/avatars/r/a/rainbow-stitching.gif?7",
-                   speed: 20,
-                   level: 1,
-                   name: "Doge",
-                   link_url: "http://knowyourmeme.com/memes/doge")
+doge = Meme.create!(name: 'Doge',
+                    spritesheet: File.open("app/assets/images/full_doge_sprite.png"),
+                    speed: 30,
+                    level: 1)
 
-new_game = Game.create(user_id: 1)
+# ceiling_cat = Meme.create!(name: 'Ceiling Cat',
+#                     spritesheet: File.open("app/assets/images/ceiling_cat_sprite.png"),
+#                     speed: 60,
+#                     level: 2)
+#
+# rent = Meme.create!(name: 'Rent Is Too Damn High Guy',
+#                     spritesheet: File.open("app/assets/images/rent_guy_sprite.png"),
+#                     speed: 90,
+#                     level: 3)
+
+level_one = Environment.create(
+                  name: "Sky",
+                  top_layer: File.open("app/assets/images/cloud.png"),
+                  middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
+                  bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
+                 )
+
+level_two = Environment.create(
+                  name: "Space",
+                  top_layer: File.open("app/assets/images/full_doge_sprite.png"),
+                  middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
+                  bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
+                 )
+
+# new_game = Game.create(user_id: 1)

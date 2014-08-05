@@ -216,10 +216,11 @@
           player.animations.stop();
           player.frame = 1;
       }
-    
+
     // Ends game
     if (counter === 0) {
       game.destroy();
+      $('canvas').remove();
     }
 
   }

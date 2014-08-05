@@ -45,9 +45,6 @@ end
 
 gem 'capybara'
 
-# Use Paperclip with Amazon Web Services S3 
-gem 'aws-sdk'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 

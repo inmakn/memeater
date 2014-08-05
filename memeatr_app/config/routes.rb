@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
   #Home Page
-  get '/' => 'home#index', as: 'home'
+  root 'home#index'
 
   #User Routes
   resources :users, :except => :index
 
   #Game Routes
-  resources :games, :except => :index
+  resources :games, :except => [:index, :edit]
 
 
   #Sessions Routes

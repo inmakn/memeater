@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :photo_url
   validates_uniqueness_of :username
 
-  has_many :games
+  has_many :games, dependent: :destroy
 end

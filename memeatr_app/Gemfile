@@ -34,6 +34,14 @@ gem 'awesome_print'
 
 gem 'paperclip'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.2'
+end
+
+group :test do
+  gem 'shoulda-matchers', require: false
+end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -1,7 +1,15 @@
+<% @user.errors.full_messages.each do |msg| %>
+<li> <%= msg %> </li>
+<% end %>
+
 <%= form_for @user do |f| %>
   <div>
   <%= f.label :username %>
   <%= f.text_field :username %>
+  </div>
+  <div>
+  <%= f.label :photo_url %>
+  <%= f.text_field :photo_url %>
   </div>
   <div>
     <%= f.label :password %>
@@ -13,5 +21,5 @@
   </div>
 
   <%= f.submit %>
-  
+
 <% end %>

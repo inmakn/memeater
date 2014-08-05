@@ -7,15 +7,13 @@ Rails.application.routes.draw do
   resources :users, :except => :index
 
   #Game Routes
-  resources :games, :only => [:new, :create, :edit, :update]
+  resources :games, :except => :index
 
-  #GameFrame Routes
-  resources :gameframes, :only => :show
 
   #Sessions Routes
   get '/login' => 'sessions#new'
   post '/sessions' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-
+  get '/error' => 'sessions#error'
 
 end

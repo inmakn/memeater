@@ -5,4 +5,14 @@ class Environment < ActiveRecord::Base
 
   has_many :games
 
+  # Paperclip stuff
+  has_attached_file :top_layer, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :top_layer, :content_type => /\Aimage\/.*\Z/
+
+  has_attached_file :middle_layer, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :middle_layer, :content_type => /\Aimage\/.*\Z/
+
+  has_attached_file :bottom_layer, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :bottom_layer, :content_type => /\Aimage\/.*\Z/
+
 end

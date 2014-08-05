@@ -42,6 +42,8 @@ group :test do
   gem 'shoulda-matchers', require: false
 end
 
+gem 'capybara'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

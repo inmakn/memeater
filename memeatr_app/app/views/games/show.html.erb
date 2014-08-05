@@ -221,5 +221,10 @@
           player.frame = 1;
       }
 
+    if (curCounter === 0) {
+      game.destroy();
+      $('canvas').remove();
+    }
+
   }
 </script>

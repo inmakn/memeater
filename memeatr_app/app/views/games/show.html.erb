@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>MemEatr - Becuz U Like 2 Kill Memes.</title>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+    var gameWidth = 1000;
+    var gameHeight = 800
+    var game = new Phaser.Game(gameWidth, gameHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    function preload() {
+
+      // Load in images/spritesheets of
+      //    1. Main Character
+      //    2. Meme
+      //       a. dogeMeme = Meme.find(name: 'Doge')
+      //       b. ceilingCatMeme = Meme.find(name: 'CeilingCat')
+      //       c. nyanCatMeme = Meme.find(name: 'nyanCat')
+      //    3. Background layers
+      //
+      // Main character load-in might look like this:
+      // game.load.spritesheet('player', <%= character.avatar %>, 50, 50);
+      //
+      // Meme load-in might look like:
+      // game.load.spritesheet('doge', dogeMeme.avatar, 40, 40);
+      // game.load.spritesheet('ceilingCat', ceilingCatMeme.avatar, 40, 40);
+      // game.load.spritesheet('nyanCat', nyanCatMeme.avatar, 40, 40);
+
+    }
+
+    var player;
+    var background_bottom;
+    var background_top;
+    var memes;
+
+    var cursors;
+    var score = 0;
+    var scoreText;
+
+    function create() {
+
+      // Loading in our game physics (arcade style)
+      game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    }
+
+    function update() {
+
+    }
+
+    </script>
+
+  </body>
+</html>

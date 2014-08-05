@@ -34,6 +34,9 @@ gem 'awesome_print'
 
 gem 'paperclip'
 
+# Use Paperclip with Amazon Web Services S3 
+gem 'aws-sdk'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

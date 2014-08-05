@@ -1,10 +1,10 @@
-<h2>MemeEatr</h2> 
+<h1>MemeEatr</h1> 
+
+<h2>Time Limit</h2>
+<h3 id="countdown-holder"></h3>
 
 <script type="text/javascript">
   var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-
-
-
 
   var platformAssetPath = "<%= asset_path('platform.png') %>";
   var skyAssetPath = "<%= asset_path('sky.png') %>";
@@ -14,18 +14,41 @@
   var diamondAssetPath = "<%= asset_path('diamond.png') %>";
   var cloudAssetPath = "<%= asset_path('cloud.png') %>";
 
+  // ---------GAME TIMER------------
+  // start with 30
+  // decrease by 1 every 1 second
+  // if 0, stop counting and do something
+
+  var curCounter = 30;
+  var curInterval = setInterval(function(){
+    // if curCounter is 0, run special function and....
+    // clear the interval
+    if (curCounter === 0) {
+      clearInterval(curInterval);
+    } else {
+      console.log(curCounter);
+      curCounter--;
+    }
+    document.getElementById('countdown-holder').innerHTML=curCounter + ' secs';
+    // replace counter on screen with current number
+    // decrease curCoutner by 1
+  }, 1000)
+
+  if (curCounter === 0) {
+    game.destroy();
+  }
+// ---------------------------------
+
+
+
 
   function preload() {
-
-
     game.load.image('sky', skyAssetPath);
     game.load.image('diamond', diamondAssetPath);
     game.load.image('ground', platformAssetPath);
     game.load.image('star', starAssetPath);
     game.load.spritesheet('doge', dogeAssetPath, 55, 50);
     game.load.image('cloud', cloudAssetPath);
-
-    game.load.bitmapFont('desyrel', '/assets/fonts/desyrel.png', '/assets/fonts/desyrel.xml');
   }
 
   var player;
@@ -39,12 +62,6 @@
   var stars;
   var score = 0;
   var scoreText;
-
-  var textStyle = { font: '64px Desyrel', alight: center};
-  var timer;
-  var milliseconds = 0;
-  var seconds = 0;
-
 
   function create() {
 
@@ -147,9 +164,6 @@
 
       //  Our controls.
       cursors = game.input.keyboard.createCursorKeys();
-
-    // Creates timer
-    timer = game.add.bitmapText(250,250, '00:00:00', textStyle);
   }
 
   function update() {
@@ -207,22 +221,5 @@
           player.frame = 1;
       }
 
-    // Updates timer for Game
-      // updateTimer();
-  }
-
-  function updateTimer() {
-    seconds = Math.floor(game.time.time / 1000) % 60;
-    milliseconds = Math.floor(game.time.time)  % 100;
-
-    if (milliseconds < 10) {
-      milliseconds = '0' + milliseconds;
-    }
-
-    if (seconds < 10) {
-      seconds = '0' + seconds;
-    }
-
-    timer.setText(':' + seconds + ':' + milliseconds);
   }
 </script>

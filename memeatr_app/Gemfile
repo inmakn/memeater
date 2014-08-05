@@ -32,7 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
 gem 'awesome_print'
 
-gem 'paperclip', '~> 4.1'
+
+gem "paperclip", "~> 4.1"
+gem 'aws-sdk', '~> 1.5.7'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.2'

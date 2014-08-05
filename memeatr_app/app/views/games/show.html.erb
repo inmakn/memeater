@@ -1,4 +1,7 @@
-<h2>MemeEatr</h2> 
+<h1>MemeEatr</h1> 
+
+<h2>Time Limit</h2>
+<h3 id="countdown-holder"></h3>
 
 <script type="text/javascript">
   var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
@@ -11,16 +14,37 @@
   var diamondAssetPath = "<%= asset_path('diamond.png') %>";
   var cloudAssetPath = "<%= asset_path('cloud.png') %>";
 
+  // ---------GAME TIMER------------
+  // start with 30
+  // decrease by 1 every 1 second
+  // if 0, stop counting and do something
+
+  var counter = 30;
+  var curInterval = setInterval(function(){
+    // if counter is 0, run special function and....
+    // clear the interval
+    if (counter === 0) {
+      clearInterval(curInterval);
+    } else {
+      console.log(counter);
+      counter--;
+    }
+    document.getElementById('countdown-holder').innerHTML=counter + ' secs';
+    // replace counter on screen with current number
+    // decrease curCoutner by 1
+  }, 1000)
+// ---------------------------------
+
+
+
 
   function preload() {
-
-      game.load.image('sky', skyAssetPath);
-      game.load.image('diamond', diamondAssetPath);
-      game.load.image('ground', platformAssetPath);
-      game.load.image('star', starAssetPath);
-      game.load.spritesheet('doge', dogeAssetPath, 55, 50);
-      game.load.image('cloud', cloudAssetPath);
-
+    game.load.image('sky', skyAssetPath);
+    game.load.image('diamond', diamondAssetPath);
+    game.load.image('ground', platformAssetPath);
+    game.load.image('star', starAssetPath);
+    game.load.spritesheet('doge', dogeAssetPath, 55, 50);
+    game.load.image('cloud', cloudAssetPath);
   }
 
   var player;
@@ -136,7 +160,6 @@
 
       //  Our controls.
       cursors = game.input.keyboard.createCursorKeys();
-
   }
 
   function update() {
@@ -193,6 +216,12 @@
           player.animations.stop();
           player.frame = 1;
       }
-  }
 
+    // Ends game
+    if (counter === 0) {
+      game.destroy();
+      $('canvas').remove();
+    }
+
+  }
 </script>

@@ -1,0 +1,8 @@
+<h1>Meet Your Players</h1>
+
+<% @characters.each do |character| %>
+  <div class="character">
+    <%= character.name %> <br>
+    <%= image_tag character.spritesheet.url %>
+  </div>
+<% end %>

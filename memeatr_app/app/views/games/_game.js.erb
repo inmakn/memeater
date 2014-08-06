@@ -201,7 +201,7 @@ function runGame(){
 
         user_score = score;
 
-      // Ends game
+      // -----Ends game-----
         if (counter === 0) {
           console.log('Current User ID: ' + <%= user.id %> );
           console.log('Current User Score: ' + user_score);
@@ -211,8 +211,6 @@ function runGame(){
           var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
 
           // send user_score and user.id to database for Game model
-
-
         }
 
     }

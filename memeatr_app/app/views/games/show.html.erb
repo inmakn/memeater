@@ -5,3 +5,16 @@
 <p><%= @game.environment.name %></p> at Level
 <p><%= @game.level %></p>
 <p><%= @game.memes.map {|meme| meme.name } %></p>
+
+
+
+
+
+<h2 id="countdown-holder">Remaining Time: 30 secs</h2>
+
+
+<script>
+  <%= render partial: 'game.js.erb',
+  locals: {memes: @memes,
+          character: @character} %>
+</script>

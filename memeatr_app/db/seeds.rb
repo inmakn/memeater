@@ -25,7 +25,7 @@ knight = Character.create!(name: 'Super Knight',
 # Seeding 7 Memes
 
 doge = Meme.create!(name: 'Doge',
-                    spritesheet: File.open("app/assets/images/full_doge_sprite.png"),
+                    spritesheet: File.open("app/assets/images/doge_sprite.png"),
                     speed: 30,
                     level: 1)
 
@@ -69,6 +69,7 @@ space_env = Environment.create!(
                   middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
                   bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
                  )
+
 
 sea_env = Environment.create!(
                   name: "Seascape",

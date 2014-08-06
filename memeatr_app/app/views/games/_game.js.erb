@@ -1,5 +1,8 @@
 $(function(){
-  runGame();
+  $('body').on('click', 'h4', function(){
+    $('h4').remove();
+    runGame();
+  });
 })
 
 function runGame(){
@@ -36,14 +39,15 @@ function runGame(){
 
     // Enemy Sprites
     var enemySprites = []
+    var enemyNames = [];
     <% memes.each do |meme| %>
       enemySprites.push("<%= meme.spritesheet %>")
     <% end %>
 
     // Background Image Sprites
-    var bottomLayerImage = "<%= asset_path('sky2.png') %>";
-    var middleLayerImage = "<%= asset_path('smallCloud.png') %>";
-    var topLayerImage = "<%= asset_path('cloud.png') %>";
+    var bottomLayerImage = "<%= environment.bottom_layer %>"
+    var middleLayerImage = "<%= environment.middle_layer %>"
+    var topLayerImage = "<%= environment.top_layer %>"
 
     ////////// Variables and Groups ///////////
 
@@ -73,8 +77,11 @@ function runGame(){
       game.load.image('topLayer', topLayerImage);
 
       //Loading in enemies spritesheets
+      var name;
       for(var i = 0; i < enemySprites.length; i++){
-        game.load.spritesheet('enemy' + (i + 1), enemySprites[i], 58.3, 50);
+        name = 'enemy' + (i + 1);
+        enemyNames.push(name);
+        game.load.spritesheet(name, enemySprites[i], 58.3, 50);
       }
 
       // Loading in character sprite
@@ -201,14 +208,11 @@ function runGame(){
 
       // -----Ends game-----
         if (counter === 0) {
-          console.log('Current User ID: ' + <%= user.id %> );
-          console.log('Current User Score: ' + user_score);
           game.destroy();
           $('canvas').remove();
-          var currUserInfo = $('<h2 id="user_id">').text('UserID of Current Player is: ' + <%= user.id %>).css('text-align', 'middle').appendTo('body');
           var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
-          console.log('Game ID is: ' + <%= @game.id %>);
-    
+          $('<p>').text("Play Again").css('text-align', 'middle').appendTo('body');
+
           // send user_score and user.id to database for Game model
 
           var gameId = <%= @game.id %>;
@@ -228,6 +232,7 @@ function runGame(){
           .done(console.log('done'));
           // ------------------------------------------------------
         }
+
     }
 
     function eatMeme (player, meme) {
@@ -237,18 +242,19 @@ function runGame(){
     }
 
     function createEnemies(){
-      for(var i = 0; i < 5; i++) {
-        createLevelOneMemes();
-        createLevelThreeMemes();
+      for(var i = 0; i < 30; i++) {
+        var meme;
+        createMemes();
       }
     }
 
-    function createLevelOneMemes() {
+    function createMemes() {
+      memeName = enemyNames[Math.floor(Math.random()*enemyNames.length)];
       xPos = Math.floor(Math.random() * screenWidth) - 100;
       yPos = Math.floor(Math.random() * screenHeight) - 500;
-      randomFrame = Math.floor(Math.random() * 4);
+      randomFrame = Math.floor(Math.random() * 6);
 
-      enemy = enemies.create(xPos, yPos, 'enemy1', randomFrame);
+      enemy = enemies.create(xPos, yPos, memeName, randomFrame);
       xSpeed = Math.floor(Math.random() * 40) - 20;
       ySpeed = Math.floor(Math.random() * 300) + 100;
 
@@ -260,16 +266,5 @@ function runGame(){
       // Making the enemies dance
       enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 15, true);
       enemy.animations.play('jiggle');
-    }
-    function createLevelThreeMemes(){
-      xPos = Math.floor(Math.random() * screenWidth) - 100;
-      yPos = Math.floor(Math.random() * screenHeight) - 500;
-      randomFrame = Math.floor(Math.random() * 4);
-      enemy = enemies.create(xPos, yPos, 'enemy3', randomFrame);
-      xSpeed = Math.floor(Math.random() * 40) - 20;
-      ySpeed = Math.floor(Math.random() * 300) + 100;
-      game.physics.arcade.enable(enemy);
-      enemy.body.velocity.x = xSpeed;
-      enemy.body.velocity.y = ySpeed;
     }
 }

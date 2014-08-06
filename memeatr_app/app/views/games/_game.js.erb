@@ -48,7 +48,6 @@ function runGame(){
       if (counter === 0) {
         clearInterval(curInterval);
       } else {
-        console.log(counter);
         counter--;
       }
       document.getElementById('countdown-holder').innerHTML=counter + ' secs';
@@ -204,8 +203,16 @@ function runGame(){
 
       // Ends game
         if (counter === 0) {
+          console.log('Current User ID: ' + <%= user.id %> );
+          console.log('Current User Score: ' + user_score);
           game.destroy();
           $('canvas').remove();
+          var currUserInfo = $('<h2 id="user_id">').text('UserID of Current Player is: ' + <%= user.id %>).css('text-align', 'middle').appendTo('body');
+          var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
+
+          // send user_score and user.id to database for Game model
+
+
         }
 
     }

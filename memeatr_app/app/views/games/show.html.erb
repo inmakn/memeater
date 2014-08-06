@@ -1,11 +1,14 @@
 <h1>Good luck, <%= @game.user.username %></h1> 
-<h1>this is game number <%= @game.user.num_games_played %> for you!</h1> 
+<h1>this is game number <%= @game.user.games.length %> for you!</h1> 
 
-<p><%= @game.character.name %></p> in
-<p><%= @game.environment.name %></p> at Level
-<p><%= @game.level %></p>
-<p><%= @game.memes.map {|meme| meme.name } %></p>
-
+<p><%= @game.character.name %> in <%= @game.environment.name %> at Level <%= @game.level %></p>
+  <h4>Enemy Memes:</h4>
+  <ul>
+    <% @game.memes.each do |meme| %>
+     <li><%= meme.name %></li>
+     <img src="<%= meme.spritesheet %>">
+    <% end %>
+  </ul>
 
 
 
@@ -14,6 +17,9 @@
 
 <script>
   <%= render partial: 'game.js.erb',
-  locals: {memes: @memes,
-          character: @character} %>
+  locals: {
+          user: @game.user,
+          memes: @game.memes,
+          character: @game.character,
+          environment: @game.environment} %>
 </script>

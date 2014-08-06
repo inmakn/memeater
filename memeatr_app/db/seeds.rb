@@ -56,26 +56,26 @@ spongebob = Meme.create!(name: 'Spongebob',
 
 # Seeding 3 Environments
 
-sky_env = Environment.create!(
-                  name: "Sky",
-                  top_layer: File.open("app/assets/images/cloud.png"),
-                  middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
-                  bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
-                 )
-
-space_env = Environment.create!(
-                  name: "Space",
-                  top_layer: File.open("app/assets/images/full_doge_sprite.png"),
-                  middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
-                  bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
-                 )
-
-
-sea_env = Environment.create!(
-                  name: "Seascape",
-                  top_layer: File.open("app/assets/images/full_doge_sprite.png"),
-                  middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
-                  bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
-                 )
+# sky_env = Environment.create!(
+#                   name: "Sky",
+#                   top_layer: File.open("app/assets/images/cloud.png"),
+#                   middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
+#                   bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
+#                  )
+#
+# space_env = Environment.create!(
+#                   name: "Space",
+#                   top_layer: File.open("app/assets/images/full_doge_sprite.png"),
+#                   middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
+#                   bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
+#                  )
+#
+#
+# sea_env = Environment.create!(
+#                   name: "Seascape",
+#                   top_layer: File.open("app/assets/images/full_doge_sprite.png"),
+#                   middle_layer: File.open("app/assets/images/full_doge_sprite.png"),
+#                   bottom_layer: File.open("app/assets/images/full_doge_sprite.png")
+#                  )
 
 # new_game = Game.create(user_id: 1)

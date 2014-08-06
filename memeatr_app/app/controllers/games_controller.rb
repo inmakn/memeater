@@ -16,6 +16,11 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.user = current_user
     @game.score = 0
+
+    active_memes = []
+    Meme.where('level <= ?', @game.level).each {|meme| active_memes.push(meme) }
+    active_memes.each {|meme| @game.memes.push(meme) }
+
       if @game.user.num_games_played > 7
           @game.level = 3
       elsif @game.user.num_games_played > 3
@@ -23,11 +28,6 @@ class GamesController < ApplicationController
       else
           @game.level = 1
       end
-
-    found_memes = Meme.where('level <= ?', @game.level)
-    active_memes = []
-    found_memes.each {|meme| active_memes.push(meme) }
-    active_memes.each {|meme| @game.memes.push(meme) }
 
     if @game.save
       redirect_to game_path(@game)

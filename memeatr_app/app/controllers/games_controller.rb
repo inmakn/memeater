@@ -4,28 +4,6 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
-  def show
-    @game = Game.find(params[:id])
-    @memes = []
-
-    # if current_user.num_games_played > 7
-    #   memes_to_display = Meme.where('level <= ?' 3)
-    #   memes_to_display.each do |meme|
-    #     @memes.push(meme.avatar)
-    #   end
-    # elsif current_user.num_games_played > 3
-    #   memes_to_display = Meme.where('level <= ?' 2)
-    #   memes_to_display.each do |meme|
-    #     @memes.push(meme)
-    #   end
-    # elsega
-    #   memes_to_display = Meme.where(level: 1)
-    #   memes_to_display.each do |meme|
-    #     @memes.push(meme)
-    #   end3
-    # end
-  end
-
   def create
     @game = Game.new
     if @game.save
@@ -33,6 +11,16 @@ class GamesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    # @game = Game.find(params[:id])
+    # @memes = []
+    #
+    # @meme_spritesheets
+
+    @memes = Meme.all
+    @character = Character.find(2)
   end
 
   def edit

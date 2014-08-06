@@ -42,8 +42,8 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    if @game.update
-      redirect_to game_path(@game)
+    if @game.update(game_params)
+      render json: @game
     else
       render :edit
     end

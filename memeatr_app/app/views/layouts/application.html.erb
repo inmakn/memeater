@@ -7,21 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h4><%= link_to "Home", root_path %></h4>
-
-  <% if current_user %>
-  <h2>Hi, <%= current_user.username %>!</h2>
-  <p><%= link_to "My Homepage", user_path(current_user) %> |
-    <%= link_to "Log Out", logout_path %> |
-    <%= link_to "New Game", new_game_path %> </p>
+  <h1>MemeEatr</h1> 
+  <div>
+    <% if current_user %>
+      <%= link_to "My Homepage", user_path(current_user) %> |
+      <%= link_to "Log Out", logout_path %> |
+      <%= link_to "New Game", new_game_path %>
+    <% else %>
+      <%= link_to "Sign Up", new_user_path %> |
+      <%= link_to "Log In", login_path %>
+    <% end %>
+  </div>
   <hr>
 
-  <% else %>
-  <p><%= link_to "Sign Up", new_user_path %> | <%= link_to "Log In", login_path %></p>
-  <hr>
-  <% end %>
-
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

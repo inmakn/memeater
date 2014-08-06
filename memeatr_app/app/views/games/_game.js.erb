@@ -207,10 +207,26 @@ function runGame(){
           $('canvas').remove();
           var currUserInfo = $('<h2 id="user_id">').text('UserID of Current Player is: ' + <%= user.id %>).css('text-align', 'middle').appendTo('body');
           var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
-          $('<button id="play-again-button">').text('Play Again').css('text-align', 'middle').appendTo('body');
-
-
+          console.log('Game ID is: ' + <%= @game.id %>);
+    
           // send user_score and user.id to database for Game model
+
+          var gameId = <%= @game.id %>;
+          // var userId = <%= user.id %>;
+          var gameScore = user_score;
+          var params = {
+            game: {
+              score: gameScore
+            }
+          }
+
+          $.ajax({
+            url: '/games/' + gameId,
+            type: 'PUT',
+            data: params
+          })
+          .done(console.log('done'));
+          // ------------------------------------------------------
         }
     }
 

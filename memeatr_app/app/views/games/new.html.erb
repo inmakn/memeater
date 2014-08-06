@@ -1,9 +1,5 @@
 <h2>Customize Your New Game, <%= current_user.username %> </h2> 
 
-<h2>Time Limit</h2>
-<h3 id="countdown-holder"></h3>
-
-
 <% @game.errors.full_messages.each do |msg| %>
 <li> <%= msg %> </li>
 <% end %>

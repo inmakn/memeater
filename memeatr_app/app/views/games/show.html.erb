@@ -1,10 +1,10 @@
 <h1>Good luck, <%= @game.user.username %></h1> 
-<h1>this is game number <%= @game.user.num_games_played %> for you!</h1> 
+<!-- <h1>this is game number <%= @game.user.num_games_played %> for you!</h1>  -->
 
-<p><%= @game.character.name %></p> in
+<!-- <p><%= @game.character.name %></p> in
 <p><%= @game.environment.name %></p> at Level
 <p><%= @game.level %></p>
-<p><%= @game.memes.map {|meme| meme.name } %></p>
+<p><%= @game.memes.map {|meme| meme.name } %></p> -->
 
 
 
@@ -14,6 +14,9 @@
 
 <script>
   <%= render partial: 'game.js.erb',
-  locals: {memes: @memes,
-          character: @character} %>
+  locals: {
+          user: @game.user,
+          memes: @game.memes,
+          character: @game.character,
+          environment: @game.environment} %>
 </script>

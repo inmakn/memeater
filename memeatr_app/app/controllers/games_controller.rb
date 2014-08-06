@@ -1,11 +1,9 @@
-require 'pry'
-
 class GamesController < ApplicationController
-
-  before_action :authenticate?, only: [:new, :create, :show]
 
   def show
     @game = Game.find(params[:id])
+    # @memes = Meme.all
+    # @character = Character.find(2)
   end
 
   def new
@@ -25,9 +23,11 @@ class GamesController < ApplicationController
       else
           @game.level = 1
       end
+
+    found_memes = Meme.where('level <= ?', @game.level)
     active_memes = []
-    Meme.where('level <= ?', @game.level).each {|meme| active_memes.push(meme) }
-    @game.memes = active_memes
+    found_memes.each {|meme| active_memes.push(meme) }
+    active_memes.each {|meme| @game.memes.push(meme) }
 
     if @game.save
       redirect_to game_path(@game)

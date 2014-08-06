@@ -12,7 +12,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.num_games_played = 0
     if @user.save
       session[:current_user] = @user.id
       redirect_to user_path(@user)

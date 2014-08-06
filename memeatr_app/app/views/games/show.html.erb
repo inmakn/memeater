@@ -1,19 +1,14 @@
-<h1>Good luck, <%= @game.user.username %></h1> 
-<h1>this is game number <%= @game.user.num_games_played %> for you!</h1> 
-
-<p><%= @game.character.name %></p> in
-<p><%= @game.environment.name %></p> at Level
-<p><%= @game.level %></p>
-<p><%= @game.memes.map {|meme| meme.name } %></p>
-
-
-
-
-
 <h2 id="countdown-holder">Remaining Time: 30 secs</h2>
+<%= link_to 'Reload', url_for(params) %>
+<h3>Games Played: <%= @game.user.num_games_played %></h3>
+
+<h4>Click here to start the game!</h4>
 
 <script>
   <%= render partial: 'game.js.erb',
-  locals: {memes: @memes,
-          character: @character} %>
+  locals: {
+          user: @game.user,
+          memes: @game.memes,
+          character: @game.character,
+          environment: @game.environment} %>
 </script>

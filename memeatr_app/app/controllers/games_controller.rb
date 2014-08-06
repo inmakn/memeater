@@ -18,7 +18,6 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.user = current_user
     @game.score = 0
-
       if @game.user.num_games_played > 7
           @game.level = 3
       elsif @game.user.num_games_played > 3
@@ -31,7 +30,6 @@ class GamesController < ApplicationController
     @game.memes = active_memes
 
     if @game.save
-      @games.num_games_played += 1
       redirect_to game_path(@game)
     else
       render :new

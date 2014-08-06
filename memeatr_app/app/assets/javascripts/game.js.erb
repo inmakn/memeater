@@ -38,6 +38,26 @@ function runGame(){
     var scoreText;
     var cursors;
 
+    // ---------GAME TIMER------------
+    // start with 30
+    
+    var counter = 30;
+    var curInterval = setInterval(function(){
+      // if counter is 0, run special function and....
+      // clear the interval
+      if (counter === 0) {
+        clearInterval(curInterval);
+      } else {
+        console.log(counter);
+        counter--;
+      }
+      document.getElementById('countdown-holder').innerHTML=counter + ' secs';
+      // replace counter on screen with current number
+      // decrease curCoutner by 1
+    }, 1000)
+  // ---------------------------------
+
+
     function preload() {
         game.load.image('sky', skyImage);
         game.load.image('cloud', cloudImage);
@@ -181,6 +201,13 @@ function runGame(){
         }
 
         user_score = score;
+
+      // Ends game
+        if (counter === 0) {
+          game.destroy();
+          $('canvas').remove();
+        }
+
     }
 
     function collectMeme (player, meme) {
@@ -191,4 +218,5 @@ function runGame(){
       score += 10;
       scoreText.text = 'Score: ' + score;
     }
+
 }

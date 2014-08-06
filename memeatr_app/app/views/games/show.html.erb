@@ -1,1 +1,7 @@
-<h1>MemeEatr Show</h1> 
+<h1>Good luck, <%= @game.user.username %></h1> 
+<h1>this is game number <%= @game.user.num_games_played %> for you!</h1> 
+
+<p><%= @game.character.name %></p> in
+<p><%= @game.environment.name %></p> at Level
+<p><%= @game.level %></p>
+<p><%= @game.memes.map {|meme| meme.name } %></p>

@@ -1,0 +1,229 @@
+$(function(){
+  runGame();
+})
+
+function runGame(){
+
+    var screenWidth = 700
+    var screenHeight = 500
+    var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    // Sprites/Sheets
+    var skyImage = "<%= asset_path('sky2.png') %>";
+    var cloudImage = "<%= asset_path('cloud.png') %>";
+    var smallCloudImage = "<%= asset_path('smallCloud.png') %>";
+    var baddieImage = "<%= asset_path('baddie.png') %>";
+    var dogeImage = "<%= asset_path('full_doge_sprite.png') %>";
+    var knightImage = "<%= asset_path('knight_sprite_sheet.png')%>"
+
+    // Sprites/Sheets
+    // var skyImage = "/assets/sky2.png";
+    // var cloudImage = "/assets/cloud.png";
+    // var smallCloudImage = "assets/smallCloud.png";
+    // var baddieImage = "/assets/baddie.png";
+    // var dogeImage = "/assets/full_doge_sprite.png";
+    // var knightImage = "/assets/knight_sprite_sheet.png";
+
+    var player;
+    var enemies;
+
+    // Background Stuff
+    var clouds;
+    var cloudsBottom;
+    var bground;
+
+    // Keeping Score Stuff
+    var user_score;
+    var score = 0;
+    var scoreText;
+    var cursors;
+
+    // ---------GAME TIMER------------
+    // start with 30 seconds
+
+    var counter = 30;
+    var curInterval = setInterval(function(){
+      // if counter is 0, run special function and....
+      // clear the interval
+      if (counter === 0) {
+        clearInterval(curInterval);
+      } else {
+        counter--;
+      }
+      document.getElementById('countdown-holder').innerHTML=counter + ' secs';
+      // replace counter on screen with current number
+      // decrease curCoutner by 1
+    }, 1000)
+  // ---------------------------------
+
+
+    function preload() {
+        game.load.image('sky', skyImage);
+        game.load.image('cloud', cloudImage);
+        game.load.image('smallCloud', smallCloudImage);
+        game.load.spritesheet('baddie', dogeImage, 58.3, 50);
+        game.load.spritesheet('knight', knightImage, 42.4, 45);
+    }
+
+    function create() {
+        var xPos;
+        var yPos;
+        var baddie;
+        var randomFrame;
+        var xSpeed;
+        var ySpeed;
+
+        //  We're going to be using physics, so enable the Arcade Physics system
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.scale.pageAlignHorizontally = true;
+        game.scale.refresh();
+
+        //  A simple background for our game
+        bground = game.add.tileSprite(0, 0, 800, 1200, 'sky');
+
+        // Making groups for the three layers
+        cloudsBottom = game.add.group();
+        cloudsTop = game.add.group();
+        enemies = game.add.group();
+
+        // Randomly placing 60 small clouds
+        for(var i = 0; i < 30; i++) {
+          xPos = Math.floor(Math.random() * screenWidth) - 100;
+          yPos = Math.floor(Math.random() * screenHeight) - 100;
+          cloudsBottom.create(xPos, yPos, 'smallCloud');
+          xPos = Math.floor(Math.random() * screenWidth) - 100;
+          yPos = Math.floor(Math.random() * screenHeight) - 700;
+          cloudsBottom.create(xPos, yPos, 'smallCloud');
+        }
+
+        // Randomly placing 16 large clouds
+        for(var i = 0; i < 8; i++) {
+          xPos = Math.floor(Math.random() * screenWidth) - 100;
+          yPos = Math.floor(Math.random() * screenHeight) - 100;
+          cloudsTop.create(xPos, yPos, 'cloud');
+          xPos = Math.floor(Math.random() * screenWidth) - 100;
+          yPos = Math.floor(Math.random() * screenHeight) - 700;
+          cloudsTop.create(xPos, yPos, 'cloud');
+        }
+
+        // Randomly placing 10 meme enemies
+        for(var i = 0; i < 10; i++) {
+          xPos = Math.floor(Math.random() * screenWidth) - 100;
+          yPos = Math.floor(Math.random() * screenHeight) - 100;
+          randomFrame = Math.floor(Math.random() * 4);
+
+          baddie = enemies.create(xPos, yPos, 'baddie', randomFrame);
+          xSpeed = Math.floor(Math.random() * 400) - 200;
+          ySpeed = Math.floor(Math.random() * 400) - 200;
+
+          // Giving the enemies physics (e.g. velocities, bounce)
+          game.physics.arcade.enable(baddie);
+          baddie.body.velocity.x = xSpeed;
+          baddie.body.velocity.y = ySpeed;
+          baddie.body.collideWorldBounds = true;
+          baddie.body.bounce.x = 1;
+          baddie.body.bounce.y = 1;
+          baddie.animations.add('jiggle', [0, 1, 2, 3, 4], 15, true);
+        }
+
+        // The player and its settings
+        //player = game.add.sprite(game.world.width / 2, game.world.height / 2 + 100, 'doge');
+        player = game.add.sprite(game.world.width / 2, game.world.height / 2 + 100, 'knight');
+
+        //  We need to enable physics on the player
+        game.physics.arcade.enable(player);
+
+        //  Player physics properties.
+        player.body.collideWorldBounds = true;
+        player.anchor.setTo(0.5, 0.5);
+
+        //  Our two animations, walking left and right.
+        //player.animations.add('left', [0, 1, 2], 15, true);
+        //player.animations.add('right', [5, 4, 3], 15, true);
+        player.animations.add('move', [0, 1, 2, 3], 8, true);
+        player.animations.add('attack', [3, 4], 8, false);
+
+        //  Our controls.
+        cursors = game.input.keyboard.createCursorKeys();
+        //attackButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+        scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#0000FF' });
+    }
+
+    function update() {
+
+        bground.tilePosition.y += 1;
+
+        if (cloudsTop.y > screenHeight *2 + 300) {
+          cloudsTop.y = -(screenHeight + 400);
+        }
+        if (cloudsBottom.y > screenHeight * 2 + 300) {
+          cloudsBottom.y = -(screenHeight);
+        }
+        cloudsTop.y += 5;
+        cloudsBottom.y += 2;
+
+        // Collide the player with the enemies
+        // game.physics.arcade.collide(player, enemies);
+
+        //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+        game.physics.arcade.overlap(player, enemies, collectMeme, null, this);
+
+        ///////////////////////////// DOGE /////////////////////////////
+
+        //  Reset the player's velocity (movement)
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+
+        if (cursors.left.isDown)
+        {
+            player.body.velocity.x = -150;
+            player.animations.play('move');
+        }
+        else if (cursors.right.isDown)
+        {
+            player.body.velocity.x = 150;
+            player.animations.play('move');
+        }
+
+        if (cursors.up.isDown)
+        {
+            player.body.velocity.y = -150;
+            player.animations.play('move');
+        }
+        else if (cursors.down.isDown) {
+            player.body.velocity.y = 150;
+            player.animations.play('move');
+        }
+        else {
+          player.animations.stop();
+        }
+
+        user_score = score;
+
+      // -----Ends game-----
+        if (counter === 0) {
+          console.log('Current User ID: ' + <%= user.id %> );
+          console.log('Current User Score: ' + user_score);
+          game.destroy();
+          $('canvas').remove();
+          var currUserInfo = $('<h2 id="user_id">').text('UserID of Current Player is: ' + <%= user.id %>).css('text-align', 'middle').appendTo('body');
+          var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
+          $('<a href="#">').text('Play Again').css('text-align', 'middle').appendTo('body');
+
+
+          // send user_score and user.id to database for Game model
+        }
+
+    }
+
+    function collectMeme (player, meme) {
+
+      // Removes the meme from the screen
+      meme.kill();
+
+      score += 10;
+      scoreText.text = 'Score: ' + score;
+    }
+
+}

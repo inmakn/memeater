@@ -1,0 +1,7 @@
+<h2><%= @user.username %></h2>
+
+<%= image_tag @user.avatar.url %>
+<%= image_tag @user.avatar.url(:medium) %>
+<%= image_tag @user.avatar.url(:thumb) %>
+
+<!-- <h4>Number of Games Played: <%= @user.num_games_played %></h4> -->

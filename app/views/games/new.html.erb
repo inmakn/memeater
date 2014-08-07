@@ -1,10 +1,7 @@
-<h2>Customize Your New Game, <%= current_user.username %> </h2> 
-
+<h2>Choose Your Game Options, <%= current_user.username %> </h2>
 <% @game.errors.full_messages.each do |msg| %>
 <li> <%= msg %> </li>
 <% end %>
-
-
 <%= form_for @game do |f| %>
 
 <%= f.label :character %>

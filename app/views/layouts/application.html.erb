@@ -5,22 +5,35 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <h1>MemeEatr</h1> 
-  <div>
+  <h1 id="logo">MemeEatr</h1>
+  <div id="home_nav">
+    <ul>
+    <li><%= link_to "Home", root_path %></li>
     <% if current_user %>
-      <%= link_to "My Homepage", user_path(current_user) %> |
-      <%= link_to "Log Out", logout_path %> |
-      <%= link_to "New Game", new_game_path %>
+      <li><%= link_to "Play Game", new_game_path %></li>
     <% else %>
-      <%= link_to "Sign Up", new_user_path %> |
-      <%= link_to "Log In", login_path %>
+      <li><%= link_to "Sign Up", new_user_path %></li>
+      <li><%= link_to "Log In", login_path %></li>
     <% end %>
+    <li><%= link_to "Characters", characters_path %></li>
+    <li><%= link_to "Memes", memes_path %></li>
+    </ul>
   </div>
-  <hr>
-
-  <%= yield %>
-
+  <% if current_user %>
+    <div id="user-info">
+      <p>User: <%= current_user.username %></p>
+      <p>Games Played: <%= current_user.games.length %></p>
+      <% current_user.update_high_score %>
+      <p>High Score: <%= current_user.high_score %></p>
+      <p><%= link_to "Edit Account Settings", edit_user_path(current_user) %></p>
+      <p><%= link_to "Log Out", logout_path %></p>
+    </div>
+  <% end %>
+  <div id="content">
+    <%= yield %>
+  </div>
 </body>
 </html>

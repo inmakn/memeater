@@ -1,12 +1,14 @@
 class GamesController < ApplicationController
 
+  before_action :authenticate?, only: [:show, :new]
+
   def show
+    @user = current_user
     @game = Game.find(params[:id])
-    # @memes = Meme.all
-    # @character = Character.find(2)
   end
 
   def new
+    @user = current_user
     @game = Game.new
     @characters = Character.all
     @environments = Environment.all
@@ -17,9 +19,9 @@ class GamesController < ApplicationController
     @game.user = current_user
     @game.score = 0
 
-    if @game.user.games.length > 7
+    if @game.user.games.length > 10
       @game.level = 3
-    elsif @game.user.games.length > 3
+    elsif @game.user.games.length > 5
       @game.level = 2
     else
       @game.level = 1
@@ -36,16 +38,10 @@ class GamesController < ApplicationController
     end
   end
 
-  def edit
-    @game = Game.find(params[:id])
-  end
-
   def update
     @game = Game.find(params[:id])
     if @game.update(game_params)
       render json: @game
-    else
-      render :edit
     end
   end
 

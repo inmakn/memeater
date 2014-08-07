@@ -3,12 +3,12 @@ class GamesController < ApplicationController
   before_action :authenticate?, only: [:show, :new]
 
   def show
+    @user = current_user
     @game = Game.find(params[:id])
-    # @memes = Meme.all
-    # @character = Character.find(2)
   end
 
   def new
+    @user = current_user
     @game = Game.new
     @characters = Character.all
     @environments = Environment.all
@@ -36,10 +36,6 @@ class GamesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @game = Game.find(params[:id])
   end
 
   def update

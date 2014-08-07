@@ -30,9 +30,9 @@
   </div>
   <% if current_user %>
     <div id="user-info">
-      <p>User:<%= @user.username %></p>
-      <p>Games Played: <%= @user.games.length %></p>
-      <p>High Score: <%= @user.high_score %></p>
+      <p>User: <%= current_user.username %></p>
+      <p>Games Played: <%= current_user.games.length %></p>
+      <p>High Score: <%= current_user.high_score %></p>
     </div>
   <% end %>
   <div id="content">

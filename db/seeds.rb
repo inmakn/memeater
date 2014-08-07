@@ -1,17 +1,15 @@
 # Seeding 1 User
 fen = User.create!(username: 'fen',
-                  password: 'querty',
-                  password_confirmation: 'querty',
+                  password: 'fen',
+                  password_confirmation: 'fen',
                   high_score: 200)
 
-sean = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
-                  username: 'sean',
+sean = User.create!(username: 'sean',
                   password: 'sean',
                   password_confirmation: 'sean',
                   high_score: 0)
 
-albert = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
-                  username: 'albert',
+albert = User.create!(username: 'albert',
                   password: 'albert',
                   password_confirmation: 'albert',
                   high_score: 0)

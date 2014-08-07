@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
 
+  before_action :authenticate?, only: [:show, :new]
+
   def show
     @user = current_user
     @game = Game.find(params[:id])
@@ -36,16 +38,10 @@ class GamesController < ApplicationController
     end
   end
 
-  def edit
-    @game = Game.find(params[:id])
-  end
-
   def update
     @game = Game.find(params[:id])
-    if @game.update
-      redirect_to game_path(@game)
-    else
-      render :edit
+    if @game.update(game_params)
+      render json: @game
     end
   end
 

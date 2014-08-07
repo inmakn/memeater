@@ -2,7 +2,7 @@
 fen = User.create!(username: 'fen',
                   password: 'fen',
                   password_confirmation: 'fen',
-                  high_score: 200)
+                  high_score: 0)
 
 sean = User.create!(username: 'sean',
                   password: 'sean',
@@ -16,14 +16,15 @@ albert = User.create!(username: 'albert',
 
 # Seeding 3 Characters
 
-finn = Character.create!(name: 'Wilhelm',
+finn = Character.create!(name: 'Finn The Human',
                          hp: 15,
                          spritesheet: File.open("app/assets/images/finn_sprite_sheet.png")
                          )
 
-# jetpack = Character.create!(name: 'Jetpack Dude',
-#                          hp: 30,
-#                          spritesheet: )
+jetpack = Character.create!(name: 'Jetpack Dude',
+                        hp: 30,
+                        spritesheet: File.open("app/assets/images/jetpack_sprite_sheet.png")
+                        )
 
 knight = Character.create!(name: 'Super Knight',
                          hp: 50,
@@ -40,17 +41,24 @@ doge = Meme.create!(name: 'Doge',
 ceiling_cat = Meme.create!(name: 'Ceiling Cat',
                     spritesheet: File.open("app/assets/images/ceilingcat_spritesheet.png"),
                     speed: 60,
-                    level: 2)
+                    level: 1)
 
 rent = Meme.create!(name: 'Rent Is Too Damn High Guy',
                     spritesheet: File.open("app/assets/images/too_damn_high_spritesheet.png"),
                     speed: 90,
-                    level: 3)
+                    level: 1)
 
 nyan = Meme.create!(name: 'Nyan Cat',
                     spritesheet: File.open("app/assets/images/nyancat_spritesheet.png"),
                     speed: 90,
-                    level: 3)
+                    level: 1)
+
+mudkip = Meme.create!(name: 'Mudkip',
+                    spritesheet: File.open("app/assets/images/mudkip_spritesheet.png"),
+                    speed: 90,
+                    level: 1)
+
+# Seeding 3 Environments
 
 level_one = Environment.create!(
                   name: "Sky",
@@ -71,6 +79,13 @@ level_three = Environment.create(
                   top_layer: File.open("app/assets/images/small_piranha.png"),
                   middle_layer: File.open("app/assets/images/small_patrick.png"),
                   bottom_layer: File.open("app/assets/images/bubbles.png")
+                 )
+
+level_cash = Environment.create(
+                  name: "Dollars In The Wind",
+                  top_layer: File.open("app/assets/images/adam_transparent.png"),
+                  middle_layer: File.open("app/assets/images/hari_transparent.png"),
+                  bottom_layer: File.open("app/assets/images/balloons.png")
                  )
 
 # new_game = Game.create(user_id: 1)

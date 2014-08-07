@@ -210,9 +210,17 @@ function runGame(){
       // -----Ends game-----
         if (counter === 0) {
           game.destroy();
-          $('canvas').remove();
-          var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
-          $('<p>').text("Play Again").css('text-align', 'middle').appendTo('body');
+          $('canvas').fadeOut(1000);
+          var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('#content');
+          var playAgainButton = $('<a "<%= link_to "", new_game_path %>"').append('<span id="play-again-button">')
+            .css({
+              'text-align': 'middle',
+              'border-style': 'solid',
+              'padding': '8px 9px',
+              'border-radius': '20px',
+              'text-decoration': 'none'
+            }).appendTo('#content');
+          playAgainButton.text('Play Again').appendTo('#play-again-button');
 
           // send user_score and user.id to database for Game model
 

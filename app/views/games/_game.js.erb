@@ -209,14 +209,21 @@ function runGame(){
       // -----Ends game-----
         if (counter === 0) {
           game.destroy();
-          $('canvas').remove();
+          $('canvas').fadeOut(2000);
           var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
-          $('<p>').text("Play Again").css('text-align', 'middle').appendTo('body');
+          var playAgainButton = $('<a "<%= link_to "", new_game_path %>"').append('<span id="play-again-button">')
+            .css({
+              'text-align': 'middle',
+              'border-style': 'solid',
+              'padding': '8px 9px',
+              'border-radius': '20px'
+            }).appendTo('body');
+          playAgainButton.text('Play Again').appendTo('#play-again-button');
+
 
           // send user_score and user.id to database for Game model
 
           var gameId = <%= @game.id %>;
-          // var userId = <%= user.id %>;
           var gameScore = user_score;
           var params = {
             game: {

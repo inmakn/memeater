@@ -21,9 +21,13 @@ class GamesController < ApplicationController
     Meme.where('level <= ?', @game.level).each {|meme| active_memes.push(meme) }
     active_memes.each {|meme| @game.memes.push(meme) }
 
+<<<<<<< HEAD
       if @game.user.num_games_played > 7
+=======
+      if @game.user.games.length > 7
+>>>>>>> feature
           @game.level = 3
-      elsif @game.user.num_games_played > 3
+      elsif @game.user.games.length > 3
           @game.level = 2
       else
           @game.level = 1

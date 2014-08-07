@@ -17,9 +17,9 @@ class GamesController < ApplicationController
     @game.user = current_user
     @game.score = 0
 
-    if @game.user.games.length > 7
+    if @game.user.games.length > 10
       @game.level = 3
-    elsif @game.user.games.length > 3
+    elsif @game.user.games.length > 5
       @game.level = 2
     else
       @game.level = 1

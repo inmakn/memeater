@@ -1,4 +1,2 @@
 MemEatr
 ========
-
-Project 2

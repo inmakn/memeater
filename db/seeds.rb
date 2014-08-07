@@ -43,11 +43,6 @@ ceiling_cat = Meme.create!(name: 'Ceiling Cat',
                     speed: 60,
                     level: 1)
 
-nyan = Meme.create!(name: 'Mudkip',
-                    spritesheet: File.open("app/assets/images/mudkip_spritesheet.png"),
-                    speed: 60,
-                    level: 2)
-
 rent = Meme.create!(name: 'Rent Is Too Damn High Guy',
                     spritesheet: File.open("app/assets/images/too_damn_high_spritesheet.png"),
                     speed: 90,

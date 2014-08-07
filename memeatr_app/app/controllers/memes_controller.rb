@@ -14,7 +14,7 @@ class MemesController < ApplicationController
   def update
   end
 
-  def character_params
+  def meme_params
     params.require(:meme).permit(:spritesheet)
   end
 

@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
 
+  before_action :authenticate?, only: [:show, :new]
+
   def show
     @game = Game.find(params[:id])
     # @memes = Meme.all
@@ -44,8 +46,6 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     if @game.update(game_params)
       render json: @game
-    else
-      render :edit
     end
   end
 

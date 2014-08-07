@@ -7,8 +7,7 @@ describe "login and logout process", :type => :feature do
   before :each do
     User.create(:username => 'capybara',
               :password => 'qwerty',
-              :password_confirmation => 'qwerty',
-              :photo_url => 'http://placekitten.com/200/200')
+              :password_confirmation => 'qwerty')
   end
 
   it "logs me in" do

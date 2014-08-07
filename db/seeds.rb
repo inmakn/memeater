@@ -13,19 +13,7 @@ albert = User.create!(username: 'albert',
                   password: 'albert',
                   password_confirmation: 'albert',
                   high_score: 0)
-
-sean = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
-                  username: 'sean',
-                  password: 'sean',
-                  password_confirmation: 'sean',
-                  num_games_played: 4)
-
-albert = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
-                  username: 'albert',
-                  password: 'albert',
-                  password_confirmation: 'albert',
-                  num_games_played: 0)
-
+                  
 # Seeding 3 Characters
 
 finn = Character.create!(name: 'Wilhelm',

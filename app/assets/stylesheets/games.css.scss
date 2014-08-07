@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 canvas {
-  border: 20px solid #2F4F4F;
+  border: 20px solid white;
   border-radius: 5px;
   margin: 10px;
 }
@@ -14,4 +14,21 @@ canvas {
 
 #play:hover {
   color: green;
+}
+
+
+select {
+  padding: 3px 10px;
+  background: #4479BA;
+  color: #FFF;
+  font-family:'Press Start 2P', cursive;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 1px 10px;
+  background: #4479BA;
+  color: #FFF;
+  border-radius: 2px;
+  font-family:'Press Start 2P', cursive;
 }

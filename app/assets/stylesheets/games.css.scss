@@ -1,3 +1,17 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+canvas {
+  border: 20px solid #2F4F4F;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+#play {
+  color: red;
+}
+
+#play:hover {
+  color: green;
+}

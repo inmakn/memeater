@@ -1,0 +1,17 @@
+<h2>Customize Your New Game, <%= current_user.username %> </h2> 
+
+<% @game.errors.full_messages.each do |msg| %>
+<li> <%= msg %> </li>
+<% end %>
+
+
+<%= form_for @game do |f| %>
+
+<%= f.label :character %>
+<%= f.collection_select :character_id, @characters, :id, :name %>
+
+<%= f.label :environment %>
+<%= f.collection_select :environment_id, @environments, :id, :name %>
+
+<%= f.submit "Play Game!"%>
+<% end %>

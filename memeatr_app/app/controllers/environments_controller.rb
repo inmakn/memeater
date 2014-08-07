@@ -12,7 +12,7 @@ class EnvironmentsController < ApplicationController
   def update
   end
 
-  def character_params
+  def environment_params
     params.require(:environment).permit(:top_layer, :middle_layer, :bottom_layer)
   end
 

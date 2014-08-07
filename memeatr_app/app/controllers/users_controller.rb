@@ -22,16 +22,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.new(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.new(params[:id])
-    if @user.update(user_params)
-      redirect_to user_path(@user)
-    else
-      render :edit
-    end
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    redirect_to user_path(@user)
   end
 
   def destroy
@@ -43,7 +40,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:avatar, :username, :password, :password_confirmation)
+    params.require(:user).permit(:avatar,
+                                 :username,
+                                 :password, :password_confirmation,
+                                 :num_games_played)
   end
 
 end

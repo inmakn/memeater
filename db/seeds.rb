@@ -4,6 +4,18 @@ fen = User.create!(username: 'fen',
                   password_confirmation: 'querty',
                   high_score: 200)
 
+sean = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
+                  username: 'sean',
+                  password: 'sean',
+                  password_confirmation: 'sean',
+                  high_score: 0)
+
+albert = User.create!(avatar: File.open("app/assets/images/finn.jpg"),
+                  username: 'albert',
+                  password: 'albert',
+                  password_confirmation: 'albert',
+                  high_score: 0)
+
 # Seeding 3 Characters
 
 finn = Character.create!(name: 'Wilhelm',

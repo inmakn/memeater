@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    scores = @user.games.map { |game| game.score }
+    @user.high_score = scores.max
+    @user.save
   end
 
   def new
@@ -13,6 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.num_games_played = 0
+    @user.high_score = 0
     if @user.save
       session[:current_user] = @user.id
       redirect_to user_path(@user)
@@ -43,7 +47,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:avatar,
                                  :username,
                                  :password, :password_confirmation,
-                                 :num_games_played)
+                                 :num_games_played,
+                                 :high_score)
   end
 
 end

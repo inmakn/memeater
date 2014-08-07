@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authorize, only: [:show, :edit, :update, :destroy]
-
-  def show
-    @user = User.find(params[:id])
-    scores = @user.games.map { |game| game.score }
-    @user.high_score = scores.max
-    @user.save
-  end
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -15,11 +8,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.num_games_played = 0
     @user.high_score = 0
     if @user.save
       session[:current_user] = @user.id
-      redirect_to user_path(@user)
+      redirect_to root_path
     else
       render :new
     end
@@ -32,7 +24,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to user_path(@user)
+    redirect_to root_path
   end
 
   def destroy
@@ -44,8 +36,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:avatar,
-                                 :username,
+    params.require(:user).permit(:username,
                                  :password, :password_confirmation,
                                  :num_games_played,
                                  :high_score)

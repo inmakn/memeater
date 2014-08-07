@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:current_user] = user.id
-      redirect_to user_path(session[:current_user])
+      redirect_to root_path
     else
       flash.now[:login_error] = "That's not your username (or password)."
       render :new

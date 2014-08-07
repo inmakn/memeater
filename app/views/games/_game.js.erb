@@ -41,9 +41,16 @@ function runGame(){
     // Enemy Sprites
     var enemySprites = []
     var enemyNames = [];
-    <% memes.each do |meme| %>
-      enemySprites.push("<%= meme.spritesheet %>")
-    <% end %>
+    if (<%= environment.name == 'Dollars In The Wind' %>){
+      enemySprites.push("<%= asset_path 'dollar_spritesheet.png' %>")
+      enemySprites.push("<%= asset_path 'dollar_sparkle_spritesheet.png' %>")
+      enemySprites.push("<%= asset_path 'mck_spritesheet.png' %>")
+    }
+    else {
+      <% memes.each do |meme| %>
+          enemySprites.push("<%= meme.spritesheet %>")
+      <% end %>
+    }
 
     // Background Image Sprites
     var bottomLayerImage = "<%= environment.bottom_layer %>"
@@ -73,6 +80,8 @@ function runGame(){
 
     function preload() {
       // Loading in background images
+      game.load.audio('munch', "<%= asset_path 'nom.m4a' %>");
+      game.load.audio('bg_music', "<%= asset_path 'mbm.mp3' %>");
       game.load.image('bottomLayer', bottomLayerImage);
       game.load.image('middleLayer', middleLayerImage);
       game.load.image('topLayer', topLayerImage);
@@ -87,9 +96,15 @@ function runGame(){
 
       // Loading in character sprite
       game.load.spritesheet('character', characterSprite, 42.4, 45);
+      bg_music = game.add.audio('bg_music');
+
     }
 
     function create() {
+
+      munch_sound = game.add.audio('munch');
+      bg_music.play();
+
       var xPos;
       var yPos;
       var enemy;
@@ -144,7 +159,7 @@ function runGame(){
       player.anchor.setTo(0.5, 0.5);
 
       //  Animations
-      player.animations.add('move', [0, 1, 2, 3], 8, true);
+      player.animations.add('move', [1, 2, 3, 4], 8, true);
       player.animations.add('attack', [3, 4], 8, false);
 
       //  Our controls.
@@ -209,6 +224,7 @@ function runGame(){
 
       // -----Ends game-----
         if (counter === 0) {
+          bg_music.stop();
           game.destroy();
           $('canvas').fadeOut(1000);
           var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('#content');
@@ -225,7 +241,6 @@ function runGame(){
           // send user_score and user.id to database for Game model
 
           var gameId = <%= @game.id %>;
-          // var userId = <%= user.id %>;
           var gameScore = user_score;
           var params = {
             game: {
@@ -246,12 +261,13 @@ function runGame(){
 
     function eatMeme (player, meme) {
       meme.kill();
+      munch_sound.play();
       score += 10;
       scoreText.text = 'Score: ' + score;
     }
 
     function createEnemies(){
-      for(var i = 0; i < 100; i++) {
+      for(var i = 0; i < 30; i++) {
         var meme;
         createMemes();
       }
@@ -273,7 +289,7 @@ function runGame(){
       enemy.body.velocity.y = ySpeed;
 
       // Making the enemies dance
-      enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 15, true);
+      enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 5, true);
       enemy.animations.play('jiggle');
     }
 }

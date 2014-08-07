@@ -1,4 +1,7 @@
 <h2>Edit User</h2>
-<h3><%=# @user.username %></h3>
+<h3><%= @user.username %></h3>
 
 <%= render 'form' %>
+
+<%= button_to 'Delete Me', id: current_user.id,
+                                method: :delete %>

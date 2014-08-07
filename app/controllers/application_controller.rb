@@ -18,10 +18,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def update_high_score
-    scores = current_user.games.map { |game| game.score }
-    current_user.high_score = scores.max
-    current_user.save
-  end
-
 end

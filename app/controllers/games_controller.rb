@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
 
   def show
+    @user = current_user
     @game = Game.find(params[:id])
-    # @memes = Meme.all
-    # @character = Character.find(2)
   end
 
   def new
+    @user = current_user
     @game = Game.new
     @characters = Character.all
     @environments = Environment.all
@@ -42,8 +42,8 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    if @game.update(game_params)
-      render json: @game
+    if @game.update
+      redirect_to game_path(@game)
     else
       render :edit
     end

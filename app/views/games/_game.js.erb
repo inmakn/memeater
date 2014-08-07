@@ -1,6 +1,6 @@
 $(function(){
-  $('body').on('click', 'h4', function(){
-    $('h4').remove();
+  $('body').on('click', '#play', function(){
+    $('#play-button').remove();
     runGame();
   });
 })
@@ -34,7 +34,6 @@ function runGame(){
     ////////// Sprite Sheets ///////////
 
     // Character Sprite
-
     var characterSprite = "<%= character.spritesheet %>"
 
     // Enemy Sprites
@@ -207,32 +206,14 @@ function runGame(){
       user_score = score;
 
       // -----Ends game-----
-        if (counter === 0) {
-          game.destroy();
-          $('canvas').remove();
-          var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('body');
-          $('<p>').text("Play Again").css('text-align', 'middle').appendTo('body');
+      if (counter === 0) {
+        game.destroy();
+        $('canvas').remove();
+        var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('#content');
+        $('<p>').text("Play Again").css('text-align', 'middle').appendTo('body');
 
-          // send user_score and user.id to database for Game model
-
-          var gameId = <%= @game.id %>;
-          // var userId = <%= user.id %>;
-          var gameScore = user_score;
-          var params = {
-            game: {
-              score: gameScore
-            }
-          }
-
-          $.ajax({
-            url: '/games/' + gameId,
-            type: 'PUT',
-            data: params
-          })
-          .done(console.log('done'));
-          // ------------------------------------------------------
-        }
-
+        // send user_score and user.id to database for Game model
+      }
     }
 
     function eatMeme (player, meme) {
@@ -264,7 +245,7 @@ function runGame(){
       enemy.body.velocity.y = ySpeed;
 
       // Making the enemies dance
-      enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 15, true);
+      enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 5], 3, true);
       enemy.animations.play('jiggle');
     }
 }

@@ -1,6 +1,8 @@
-<h1>Meet Your Enemies - Memes.</h1>
+<h1>Meet Your Food: Memes.</h1>
 
 <% @memes.each do |meme| %>
-  <%= meme.name %> <br>
-  <%= image_tag meme.spritesheet.url %>
+  <div>
+    <div><%= meme.name %></div>
+    <div><%= image_tag meme.spritesheet.url %></div>
+  </div>
 <% end %>

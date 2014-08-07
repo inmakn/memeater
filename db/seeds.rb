@@ -42,6 +42,11 @@ ceiling_cat = Meme.create!(name: 'Ceiling Cat',
                     speed: 60,
                     level: 2)
 
+nyan = Meme.create!(name: 'Mudkip',
+                    spritesheet: File.open("app/assets/images/mudkip_spritesheet.png"),
+                    speed: 60,
+                    level: 2)
+
 rent = Meme.create!(name: 'Rent Is Too Damn High Guy',
                     spritesheet: File.open("app/assets/images/too_damn_high_spritesheet.png"),
                     speed: 90,
@@ -51,6 +56,7 @@ nyan = Meme.create!(name: 'Nyan Cat',
                     spritesheet: File.open("app/assets/images/nyancat_spritesheet.png"),
                     speed: 90,
                     level: 3)
+
 
 level_one = Environment.create!(
                   name: "Sky",
@@ -72,5 +78,12 @@ level_three = Environment.create(
                   middle_layer: File.open("app/assets/images/small_patrick.png"),
                   bottom_layer: File.open("app/assets/images/bubbles.png")
                  )
+
+# level_four = Environment.create(
+#                   name: 'Dollars In The Wind',
+#                   top_layer: File.open('app/assets/images/hari.png'),
+#                   middle_layer: File.open('app/assets/images/adam.png'),
+#                   bottom_layer: File.open('app/assets/images/hari.png')
+#                   )
 
 # new_game = Game.create(user_id: 1)

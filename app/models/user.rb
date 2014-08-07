@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :games, dependent: :destroy
 
+  def update_high_score
+    scores = self.games.map { |game| game.score }
+    self.high_score = scores.max
+    self.save
+  end
+
 end

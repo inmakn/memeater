@@ -1,4 +1,5 @@
 $(function(){
+  updateUserHighScore();
   $('body').on('click', '#play', function(){
     $('#play-button').remove();
     runGame();
@@ -249,7 +250,7 @@ function runGame(){
     }
 
     function createEnemies(){
-      for(var i = 0; i < 30; i++) {
+      for(var i = 0; i < 300; i++) {
         var meme;
         createMemes();
       }
@@ -274,4 +275,8 @@ function runGame(){
       enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 15, true);
       enemy.animations.play('jiggle');
     }
+}
+
+function updateUserHighScore() {
+  <%= user.update_high_score %>
 }

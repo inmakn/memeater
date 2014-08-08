@@ -41,22 +41,22 @@ doge = Meme.create!(name: 'Doge',
 ceiling_cat = Meme.create!(name: 'Ceiling Cat',
                     spritesheet: File.open("app/assets/images/ceilingcat_spritesheet.png"),
                     speed: 60,
-                    level: 1)
+                    level: 2)
 
 rent = Meme.create!(name: 'Rent Is Too Damn High Guy',
                     spritesheet: File.open("app/assets/images/too_damn_high_spritesheet.png"),
                     speed: 90,
-                    level: 1)
+                    level: 3)
 
 nyan = Meme.create!(name: 'Nyan Cat',
                     spritesheet: File.open("app/assets/images/nyancat_spritesheet.png"),
                     speed: 90,
-                    level: 1)
+                    level: 2)
 
 mudkip = Meme.create!(name: 'Mudkip',
                     spritesheet: File.open("app/assets/images/mudkip_spritesheet.png"),
                     speed: 90,
-                    level: 1)
+                    level: 3)
 
 # Seeding 3 Environments
 

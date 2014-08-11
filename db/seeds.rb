@@ -41,30 +41,24 @@ doge = Meme.create!(name: 'Doge',
 ceiling_cat = Meme.create!(name: 'Ceiling Cat',
                     spritesheet: File.open("app/assets/images/ceilingcat_spritesheet.png"),
                     speed: 60,
-                    level: 1)
-
-nyan = Meme.create!(name: 'Mudkip',
-                    spritesheet: File.open("app/assets/images/mudkip_spritesheet.png"),
-                    speed: 60,
                     level: 2)
 
 rent = Meme.create!(name: 'Rent Is Too Damn High Guy',
                     spritesheet: File.open("app/assets/images/too_damn_high_spritesheet.png"),
                     speed: 90,
-                    level: 1)
+                    level: 2)
 
 nyan = Meme.create!(name: 'Nyan Cat',
                     spritesheet: File.open("app/assets/images/nyancat_spritesheet.png"),
                     speed: 90,
-                    level: 1)
+                    level: 3)
 
 mudkip = Meme.create!(name: 'Mudkip',
                     spritesheet: File.open("app/assets/images/mudkip_spritesheet.png"),
                     speed: 90,
-                    level: 1)
+                    level: 3)
 
-# Seeding 3 Environments
-
+# Seeding 4 Environments
 
 level_one = Environment.create!(
                   name: "Sky",
@@ -73,21 +67,21 @@ level_one = Environment.create!(
                   bottom_layer: File.open("app/assets/images/blue_background.png")
                  )
 
-level_two = Environment.create(
+level_two = Environment.create!(
                   name: "Space",
                   top_layer: File.open("app/assets/images/star.png"),
                   middle_layer: File.open("app/assets/images/small_star.png"),
                   bottom_layer: File.open("app/assets/images/space_background.png")
                  )
 
-level_three = Environment.create(
+level_three = Environment.create!(
                   name: "Underwater",
                   top_layer: File.open("app/assets/images/small_piranha.png"),
                   middle_layer: File.open("app/assets/images/small_patrick.png"),
                   bottom_layer: File.open("app/assets/images/bubbles.png")
                  )
 
-level_cash = Environment.create(
+level_cash = Environment.create!(
                   name: "Dollars In The Wind",
                   top_layer: File.open("app/assets/images/adam_transparent.png"),
                   middle_layer: File.open("app/assets/images/hari_transparent.png"),

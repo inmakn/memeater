@@ -2,24 +2,38 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-canvas {
-  border: 20px solid white;
-  border-radius: 5px;
-  margin: 10px;
-}
-
 h2 {
   margin-top: 5px;
 }
 
-#play {
+#play-button {
+  font-size: 40px;
+  display: inline;
+  padding: 8px 9px;
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 500px;
+}
+
+
+#user_score {
+  font-size: 40px;
+  vertical-align: middle;
+  line-height: 500px;
+}
+
+#play-button:hover {
   color: red;
 }
 
-#play:hover {
-  color: green;
+#mygame{
+  width: 700px;
+  height: 500px;
+  border: 20px solid white;
+  border-radius: 5px;
+  margin: 40px auto;
+  background-color: black;
 }
-
 
 select {
   padding: 3px 10px;

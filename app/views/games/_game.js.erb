@@ -1,6 +1,5 @@
 $(function(){
-  updateUserHighScore();
-  $('body').on('click', '#play', function(){
+  $('body').on('click', '#play-button', function(){
     $('#play-button').remove();
     runGame();
   });
@@ -13,29 +12,26 @@ function runGame(){
     // decrease by 1 every 1 second
     // if 0, stop counting and do something
 
-    var counter = 30;
+    var counter = 40;
     var curInterval = setInterval(function(){
-      // if counter is 0, run special function and....
-      // clear the interval
+      // if counter is 0, run special function and clear the interval
       if (counter === 0) {
         clearInterval(curInterval);
       } else {
         counter--;
       }
-      document.getElementById('countdown-holder').innerHTML= 'Remaining Time: ' + counter + ' secs';
+      document.getElementById('countdown-holder').innerHTML= 'Remaining Time: ' + counter + ' seconds';
       // replace counter on screen with current number
-      // decrease curCoutner by 1
     }, 1000)
     // ---------------------------------
 
-    var screenWidth = 700
-    var screenHeight = 500
-    var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var screenWidth = 700;
+    var screenHeight = 500;
+    var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'mygame', { preload: preload, create: create, update: update });
 
     ////////// Sprite Sheets ///////////
 
     // Character Sprite
-
     var characterSprite = "<%= character.spritesheet %>"
 
     // Enemy Sprites
@@ -60,20 +56,15 @@ function runGame(){
     ////////// Variables and Groups ///////////
 
     // Character variable and Enemies group
-    var player;
-    var enemies;
+    var player, enemies;
 
     // Background Groups
-    var topLayer;
-    var middleLayer;
-    var bottomLayer;
+    var topLayer, middleLayer, bottomLayer;
 
     /////////// Misc ////////////
 
     // Keeping Score Stuff
-    var user_score;
-    var score = 0;
-    var scoreText;
+    var user_score, scoreText, score = 0;
 
     // Allowing for keyboard use
     var cursors;
@@ -94,10 +85,9 @@ function runGame(){
         game.load.spritesheet(name, enemySprites[i], 58.3, 50);
       }
 
-      // Loading in character sprite
+      // Loading in character sprite and background music
       game.load.spritesheet('character', characterSprite, 42.4, 45);
       bg_music = game.add.audio('bg_music');
-
     }
 
     function create() {
@@ -105,17 +95,11 @@ function runGame(){
       munch_sound = game.add.audio('munch');
       bg_music.play();
 
-      var xPos;
-      var yPos;
-      var enemy;
-      var randomFrame;
-      var xSpeed;
-      var ySpeed;
+      var xPos, yPos, xSpeed, ySpeed;
+      var enemy, randomFrame;
 
       //  We're going to be using physics, so enable the Arcade Physics system
       game.physics.startSystem(Phaser.Physics.ARCADE);
-      game.scale.pageAlignHorizontally = true;
-      game.scale.refresh();
 
       //  A simple background for our game
       bottomLayer = game.add.tileSprite(0, 0, 800, 1200, 'bottomLayer');
@@ -176,7 +160,7 @@ function runGame(){
       middleLayer.y += 2;
       bottomLayer.tilePosition.y += 1;
 
-      // Moving the grousp back up top if they've fallen too far
+      // Moving the groups back up top if they've fallen too far
       if (topLayer.y > screenHeight *2 + 300) {
         topLayer.y = -(screenHeight + 400);
         createEnemies();
@@ -223,39 +207,26 @@ function runGame(){
       user_score = score;
 
       // -----Ends game-----
-        if (counter === 0) {
-          bg_music.stop();
-          game.destroy();
-          $('canvas').fadeOut(1000);
-          var scoreMessage = $('<h2 id="user_score">').text('Your score is: ' + user_score).css('text-align', 'middle').appendTo('#content');
-          var playAgainButton = $('<a "<%= link_to "", new_game_path %>"').append('<span id="play-again-button">')
-            .css({
-              'text-align': 'middle',
-              'border-style': 'solid',
-              'padding': '8px 9px',
-              'border-radius': '20px',
-              'text-decoration': 'none'
-            }).appendTo('#content');
-          playAgainButton.text('Play Again').appendTo('#play-again-button');
+      if (counter === 0) {
+        bg_music.stop();
+        game.destroy();
+        $('canvas').fadeOut(1000);
+        var scoreMessage = 'Score: ' + user_score
+        $('<h2 id="user_score">').text(scoreMessage).appendTo('#mygame');
 
-          // send user_score and user.id to database for Game model
+        // send user_score and user.id to database for Game model
+        var gameId = <%= @game.id %>;
+        var gameScore = user_score;
+        var params = { game: { score: gameScore } }
 
-          var gameId = <%= @game.id %>;
-          var gameScore = user_score;
-          var params = {
-            game: {
-              score: gameScore
-            }
-          }
-
-          $.ajax({
-            url: '/games/' + gameId,
-            type: 'PUT',
-            data: params
-          })
-          .done(console.log('done'));
-          // ------------------------------------------------------
-        }
+        $.ajax({
+          url: '/games/' + gameId,
+          type: 'PUT',
+          data: params
+        })
+        .done(console.log('Done.'));
+        // ------------------------------------------------------
+      }
 
     }
 
@@ -268,32 +239,24 @@ function runGame(){
 
     function createEnemies(){
       for(var i = 0; i < 30; i++) {
-        var meme;
-        createMemes();
+        var enemy;
+        // Choosing a random enemy sprite and inserting into game
+        memeName = enemyNames[Math.floor(Math.random()*enemyNames.length)];
+        xPos = Math.floor(Math.random() * screenWidth) - 100;
+        yPos = Math.floor(Math.random() * screenHeight) - 500;
+        randomFrame = Math.floor(Math.random() * 6);
+        enemy = enemies.create(xPos, yPos, memeName, randomFrame);
+
+        // Giving the enemies physics (e.g. velocities, bounce)
+        game.physics.arcade.enable(enemy);
+        xSpeed = Math.floor(Math.random() * 40) - 20;
+        ySpeed = Math.floor(Math.random() * 300) + 100;
+        enemy.body.velocity.x = xSpeed;
+        enemy.body.velocity.y = ySpeed;
+
+        // Making the enemies dance
+        enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 5, true);
+        enemy.animations.play('jiggle');
       }
     }
-
-    function createMemes() {
-      memeName = enemyNames[Math.floor(Math.random()*enemyNames.length)];
-      xPos = Math.floor(Math.random() * screenWidth) - 100;
-      yPos = Math.floor(Math.random() * screenHeight) - 500;
-      randomFrame = Math.floor(Math.random() * 6);
-
-      enemy = enemies.create(xPos, yPos, memeName, randomFrame);
-      xSpeed = Math.floor(Math.random() * 40) - 20;
-      ySpeed = Math.floor(Math.random() * 300) + 100;
-
-      // Giving the enemies physics (e.g. velocities, bounce)
-      game.physics.arcade.enable(enemy);
-      enemy.body.velocity.x = xSpeed;
-      enemy.body.velocity.y = ySpeed;
-
-      // Making the enemies dance
-      enemy.animations.add('jiggle', [0, 1, 2, 3, 4, 6], 5, true);
-      enemy.animations.play('jiggle');
-    }
-}
-
-function updateUserHighScore() {
-  <%= user.update_high_score %>
 }

@@ -58,8 +58,7 @@ mudkip = Meme.create!(name: 'Mudkip',
                     speed: 90,
                     level: 3)
 
-# Seeding 3 Environments
-
+# Seeding 4 Environments
 
 level_one = Environment.create!(
                   name: "Sky",
@@ -68,21 +67,21 @@ level_one = Environment.create!(
                   bottom_layer: File.open("app/assets/images/blue_background.png")
                  )
 
-level_two = Environment.create(
+level_two = Environment.create!(
                   name: "Space",
                   top_layer: File.open("app/assets/images/star.png"),
                   middle_layer: File.open("app/assets/images/small_star.png"),
                   bottom_layer: File.open("app/assets/images/space_background.png")
                  )
 
-level_three = Environment.create(
+level_three = Environment.create!(
                   name: "Underwater",
                   top_layer: File.open("app/assets/images/small_piranha.png"),
                   middle_layer: File.open("app/assets/images/small_patrick.png"),
                   bottom_layer: File.open("app/assets/images/bubbles.png")
                  )
 
-level_cash = Environment.create(
+level_cash = Environment.create!(
                   name: "Dollars In The Wind",
                   top_layer: File.open("app/assets/images/adam_transparent.png"),
                   middle_layer: File.open("app/assets/images/hari_transparent.png"),

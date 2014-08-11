@@ -1,6 +1,5 @@
-<p id="countdown-holder">Remaining Time: 30 secs</p>
+<div id="countdown-holder">Remaining Time: 40 seconds</div>
 <% link_to 'Reload', url_for(params) %>
-<p id='play-button'>Click <span id="play">here</span> to Play!</p>
 <script>
   <%= render partial: 'game.js.erb',
   locals: {
@@ -9,3 +8,6 @@
           character: @game.character,
           environment: @game.environment} %>
 </script>
+<div id="mygame">
+  <div id='play-button'>Start Game</div>
+</div>

@@ -26,7 +26,6 @@
     <div id="user-info">
       <p>User: <%= current_user.username %></p>
       <p>Games Played: <%= current_user.games.length %></p>
-      <% current_user.update_high_score %>
       <p>High Score: <%= current_user.high_score %></p>
       <p><%= link_to "Edit Account Settings", edit_user_path(current_user) %></p>
       <p><%= link_to "Log Out", logout_path %></p>

@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: memeatr_app_production
-  username: memeatr_app
   password: <%= ENV['MEMEATR_APP_DATABASE_PASSWORD'] %>

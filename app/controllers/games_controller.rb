@@ -41,6 +41,7 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.update(game_params)
+      @game.user.update_high_score
       render json: @game
     end
   end

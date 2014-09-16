@@ -18,6 +18,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.user = current_user
     @game.score = 0
+    @game.finished = false
 
     if @game.user.games.length > 10
       @game.level = 3
@@ -41,13 +42,15 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.update(game_params)
+      @game.user.update_high_score
+      @game.user.clear_games
       render json: @game
     end
   end
 
   private
   def game_params
-    params.require(:game).permit(:character_id, :environment_id, :score)
+    params.require(:game).permit(:character_id, :environment_id, :score, :finished)
   end
 
 end

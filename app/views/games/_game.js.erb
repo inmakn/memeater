@@ -217,7 +217,7 @@ function runGame(){
         // send user_score and user.id to database for Game model
         var gameId = <%= @game.id %>;
         var gameScore = user_score;
-        var params = { game: { score: gameScore } }
+        var params = { game: { score: gameScore, finished: true } }
 
         $.ajax({
           url: '/games/' + gameId,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807143624) do
+ActiveRecord::Schema.define(version: 20140812210122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140807143624) do
     t.integer "character_id"
     t.integer "environment_id"
     t.integer "level"
+    t.boolean "finished"
   end
 
   create_table "games_memes", id: false, force: true do |t|

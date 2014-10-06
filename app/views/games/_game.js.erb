@@ -246,6 +246,29 @@ function runGame(){
 
     function detectPlayerCollisionWithEnemies(){
       game.physics.arcade.overlap(player, enemies, eatMeme, null, this);
+      user_score = score;
+
+      // -----Ends game-----
+      if (counter === 0) {
+        bg_music.stop();
+        game.destroy();
+        $('canvas').fadeOut(1000);
+        var scoreMessage = 'Score: ' + user_score
+        $('<h2 id="user_score">').text(scoreMessage).appendTo('#mygame');
+
+        // send user_score and user.id to database for Game model
+        var gameId = <%= @game.id %>;
+        var gameScore = user_score;
+        var params = { game: { score: gameScore, finished: true } }
+
+        $.ajax({
+          url: '/games/' + gameId,
+          type: 'PUT',
+          data: params
+        })
+        .done(console.log('Done.'));
+        // ------------------------------------------------------
+      }
     }
 
     function eatMeme (player, meme) {

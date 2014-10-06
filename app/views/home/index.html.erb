@@ -1,3 +1,18 @@
 <h2>Eat memes. Get points.</h2>
 <p>MemEatr is the best game since always in the history of ever.</p>
 <p>Play now.</p>
+
+<h2 id="leaderboard_title">Leaderboard</h2>
+
+<table id="leaderboard">
+  <tr>
+    <td class="table_col">Username</td>
+    <td class="table_col">Score</td>
+  </tr>
+  <% @games.each do |game| %>
+    <tr>
+      <td><%= User.find(game.user_id).username %></td>
+      <td><%= game.score %></td>
+    </tr>
+  <% end %>
+</table>

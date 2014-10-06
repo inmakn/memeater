@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = User.new(user_params)
     @user.high_score = 0
     if @user.save

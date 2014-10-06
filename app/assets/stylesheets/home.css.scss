@@ -10,3 +10,25 @@
 #home_nav li a {
   text-decoration: none;
 }
+
+#leaderboard_title {
+  font-size: 30px;
+  margin-top: 40px;
+}
+
+#leaderboard {
+  width: 400px;
+  margin: 0px auto;
+}
+
+table, th, td {
+   border: 2px solid white;
+}
+
+td, td {
+  padding: 5px;
+}
+
+.table_col{
+  color: red;
+}
